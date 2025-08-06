@@ -94,7 +94,7 @@ export const Skills = () => {
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-            My <span className="bg-gradient-primary bg-clip-text text-transparent">Skills</span>
+             <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">My Skills</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Explore my expertise across different domains
@@ -107,7 +107,7 @@ export const Skills = () => {
           
           {skillCategories.map((category, index) => {
             const angle = (index * 90) - 45; // 90 degrees apart, starting at -45
-            const radius = 120;
+            const radius = 150;
             const x = Math.cos((angle * Math.PI) / 180) * radius;
             const y = Math.sin((angle * Math.PI) / 180) * radius;
             

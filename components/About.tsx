@@ -14,7 +14,7 @@ export const About = () => {
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-            About <span className="bg-gradient-primary bg-clip-text text-transparent">Me</span>
+            <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">About Me</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Get to know the person behind the code
@@ -26,7 +26,7 @@ export const About = () => {
           <div className="space-y-6">
             <div className="animate-slide-up">
               <h3 className="text-2xl font-semibold mb-4 text-foreground">
-                Hello! I&apos;m Alex, a passionate developer based in San Francisco.
+                Hello! I&apos;m Kaleab, a passionate developer based in Ethiopia.
               </h3>
               
               <div className="space-y-4 text-muted-foreground">

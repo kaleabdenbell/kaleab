@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ThemeToggle } from './ThemeToggle';
+import Link from 'next/link';
 
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -37,20 +38,20 @@ export const Navigation = () => {
             href="#home" 
             className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent hover:scale-105 transition-transform duration-300"
           >
-            Portfolio
+            Kaleab
           </a>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.href}
                 href={item.href}
                 className="text-foreground/80 hover:text-foreground transition-colors duration-300 relative group"
               >
                 {item.label}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-primary transition-all duration-300 group-hover:w-full" />
-              </a>
+              </Link>
             ))}
             <ThemeToggle />
           </div>

@@ -1,258 +1,139 @@
-"use client"
-import { useState, useEffect, useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { Quote, Star, Linkedin, Twitter } from 'lucide-react';
-import Image from 'next/image';
+import { Card, CardContent } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
+const testimonials = [
+  {
+    id: 1,
+    name: "Sarah Chen",
+    role: "Product Manager",
+    company: "TechFlow",
+    content: "This platform has completely transformed how our team collaborates. The intuitive design and powerful features have boosted our productivity by 40%.",
+    avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
+    initials: "SC"
+  },
+  {
+    id: 2,
+    name: "Marcus Rodriguez",
+    role: "Engineering Lead",
+    company: "InnovateLabs",
+    content: "The attention to detail and seamless user experience is remarkable. It's rare to find a tool that's both powerful and enjoyable to use daily.",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+    initials: "MR"
+  },
+  {
+    id: 3,
+    name: "Emily Watson",
+    role: "Design Director",
+    company: "CreativeStudio",
+    content: "As a designer, I appreciate beautiful interfaces. This exceeds all expectations with its clean design and thoughtful interactions.",
+    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+    initials: "EW"
+  },
+  {
+    id: 4,
+    name: "David Kim",
+    role: "Startup Founder",
+    company: "NextGen Ventures",
+    content: "We've tried dozens of solutions, but nothing comes close to this level of quality and reliability. It's been a game-changer for our startup.",
+    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+    initials: "DK"
+  },
+  {
+    id: 5,
+    name: "Lisa Thompson",
+    role: "Operations Manager",
+    company: "GrowthCorp",
+    content: "The customer support is exceptional, and the platform keeps getting better with each update. It's clear the team really cares about user success.",
+    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face",
+    initials: "LT"
+  },
+  {
+    id: 6,
+    name: "Alex Morgan",
+    role: "CTO",
+    company: "DataDriven Inc",
+    content: "Security and performance are our top priorities, and this platform delivers on both fronts without compromising usability.",
+    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
+    initials: "AM"
+  }
+];
 
 export const Testimonials = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const testimonials = [
-    {
-      id: 1,
-      name: "Sarah Chen",
-      role: "Product Manager",
-      company: "TechFlow Inc",
-      avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=800&h=800&fit=crop&crop=face",
-      content: "Working with this developer was an absolute game-changer. The attention to detail and innovative solutions exceeded our expectations. The project was delivered on time with exceptional quality.",
-      rating: 5,
-      project: "E-commerce Platform",
-      platform: "linkedin"
-    },
-    {
-      id: 2,
-      name: "Marcus Rodriguez",
-      role: "CTO",
-      company: "StartupLab",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=800&fit=crop&crop=face",
-      content: "Incredible technical expertise combined with excellent communication skills. The developer understood our vision immediately and brought ideas that enhanced the original concept significantly.",
-      rating: 5,
-      project: "SaaS Dashboard",
-      platform: "twitter"
-    },
-    {
-      id: 3,
-      name: "Emily Watson",
-      role: "Design Director",
-      company: "Creative Studios",
-      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=800&h=800&fit=crop&crop=face",
-      content: "The perfect blend of technical skill and creative thinking. Every interaction was smooth, and the final product was not just functional but beautifully crafted. Highly recommended!",
-      rating: 5,
-      project: "Portfolio Website",
-      platform: "linkedin"
-    },
-    {
-      id: 4,
-      name: "David Kim",
-      role: "Founder",
-      company: "InnovateCorp",
-      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=800&h=800&fit=crop&crop=face",
-      content: "Outstanding developer who goes above and beyond. The code quality is exceptional, and the problem-solving approach is methodical and innovative. A true professional.",
-      rating: 5,
-      project: "Mobile App",
-      platform: "twitter"
-    }
-  ];
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
-    }, 5000);
-
-    return () => clearInterval(timer);
-  }, [testimonials.length]);
-
-  const nextTestimonial = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
-  };
-
-  const prevTestimonial = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length);
-  };
-
-  const goToTestimonial = (index: number) => {
-    setCurrentIndex(index);
-  };
-
-  const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0 }
-  };
-
-  const getPlatformIcon = (platform: string) => {
-    switch (platform) {
-      case 'linkedin':
-        return <Linkedin className="h-4 w-4" />;
-      case 'twitter':
-        return <Twitter className="h-4 w-4" />;
-      default:
-        return null;
-    }
-  };
-
   return (
-    <section ref={sectionRef} className="py-20 relative overflow-hidden bg-background">
-      <div className="container mx-auto px-6">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="text-center mb-16"
-        >
-          <motion.h2 
-            variants={itemVariants}
-            className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6"
-          >
-            What <span className="bg-gradient-primary bg-clip-text text-transparent">Clients Say</span>
-          </motion.h2>
-          <motion.p 
-            variants={itemVariants}
-            className="text-lg text-muted-foreground max-w-2xl mx-auto"
-          >
-            Real feedback from real projects that made a difference
-          </motion.p>
-        </motion.div>
+    <section id="testimonials" className="py-24 px-6">
+      <div className="container mx-auto max-w-7xl">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+            What Our Users Say
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Don't just take our word for it. Here's what real users have to say about their experience.
+          </p>
+        </div>
 
-        {/* Desktop & Mobile: Horizontal Swipeable */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="relative"
-        >
-          {/* Swipeable Container */}
-          <div className="overflow-hidden">
-            <motion.div
-              className="flex gap-6 cursor-grab active:cursor-grabbing"
-              animate={{ x: -currentIndex * (typeof window !== 'undefined' && window.innerWidth > 768 ? 600 : 350) }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              drag="x"
-              dragConstraints={{ 
-                left: -(testimonials.length - 1) * (typeof window !== 'undefined' && window.innerWidth > 768 ? 600 : 350), 
-                right: 0 
-              }}
-              onDragEnd={(_, { offset }) => {
-                const swipeThreshold = 50;
-                if (offset.x > swipeThreshold && currentIndex > 0) {
-                  prevTestimonial();
-                } else if (offset.x < -swipeThreshold && currentIndex < testimonials.length - 1) {
-                  nextTestimonial();
-                }
-              }}
+        {/* Testimonials Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {testimonials.map((testimonial) => (
+            <Card 
+              key={testimonial.id} 
+              className="group hover:shadow-lg transition-all duration-300 hover:scale-[1.02] border-muted bg-card/50 backdrop-blur-sm"
             >
-              {testimonials.map((testimonial, index) => (
-                <motion.div
-                  key={testimonial.id}
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.02 }}
-                  className="relative h-96 rounded-2xl overflow-hidden group flex-shrink-0"
-                  style={{ width: typeof window !== 'undefined' && window.innerWidth > 768 ? '580px' : '330px' }}
-                >
-                  {/* Background Avatar with Blur */}
-                  <div className="absolute inset-0">
-                    <Image
-                      src={testimonial.avatar}
-                      alt={testimonial.name}
-                      width={580}
-                      height={580}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
-                  </div>
-
-                  {/* Frosted Glass Quote Overlay */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 + 0.3 }}
-                    className="absolute inset-4 bg-black/20 backdrop-blur-md border border-white/10 rounded-xl p-6 flex flex-col justify-between"
+              <CardContent className="p-6">
+                {/* Quote */}
+                <div className="mb-6">
+                  <svg 
+                    className="w-8 h-8 text-primary/20 mb-4" 
+                    fill="currentColor" 
+                    viewBox="0 0 24 24"
                   >
-                    {/* Quote Icon & Platform Badge */}
-                    <div className="flex justify-between items-start mb-4">
-                      <Quote className="h-8 w-8 text-blue-400 opacity-80" />
-                      {testimonial.platform && (
-                        <div className="bg-blue-500/20 backdrop-blur-sm rounded-full p-2 border border-blue-400/30">
-                          {getPlatformIcon(testimonial.platform)}
-                        </div>
-                      )}
-                    </div>
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z"/>
+                  </svg>
+                  <p className="text-foreground leading-relaxed">
+                    "{testimonial.content}"
+                  </p>
+                </div>
 
-                    {/* Quote Content */}
-                    <div className="flex-1">
-                      <p className="text-white text-sm md:text-base leading-relaxed mb-4">
-                        {"\"" + testimonial.content + "\""}
-                      </p>
+                {/* Author */}
+                <div className="flex items-center gap-4">
+                  <Avatar className="w-12 h-12 border-2 border-primary/10">
+                    <AvatarImage src={testimonial.avatar} alt={testimonial.name} />
+                    <AvatarFallback className="bg-primary/10 text-primary font-semibold">
+                      {testimonial.initials}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div>
+                    <h4 className="font-semibold text-foreground">{testimonial.name}</h4>
+                    <p className="text-sm text-muted-foreground">
+                      {testimonial.role} at {testimonial.company}
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
 
-                      
-                      {/* Rating */}
-                      <div className="flex items-center gap-1 mb-4">
-                        {[...Array(testimonial.rating)].map((_, i) => (
-                          <Star key={i} className="h-4 w-4 fill-blue-400 text-blue-400" />
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Author Info */}
-                    <div>
-                      <h4 className="text-white font-semibold text-lg">{testimonial.name}</h4>
-                      <p className="text-blue-200 text-sm">{testimonial.role}</p>
-                      <p className="text-blue-300 text-xs font-medium">{testimonial.company}</p>
-                    </div>
-                  </motion.div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-
-          {/* Navigation Dots */}
-          <div className="flex justify-center mt-6 gap-2">
-            {testimonials.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => goToTestimonial(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index === currentIndex
-                    ? 'bg-blue-500 scale-125'
-                    : 'bg-muted hover:bg-blue-400/50'
-                }`}
-              />
+        {/* Bottom CTA */}
+        <div className="text-center mt-16">
+          <p className="text-muted-foreground mb-4">
+            Join thousands of satisfied users
+          </p>
+          <div className="flex justify-center gap-2">
+            {[...Array(5)].map((_, i) => (
+              <svg 
+                key={i} 
+                className="w-6 h-6 text-yellow-400 fill-current" 
+                viewBox="0 0 24 24"
+              >
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
             ))}
           </div>
-        </motion.div>
-
-        {/* Stats Section */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 pt-16 border-t border-muted"
-        >
-          {[
-            { number: "50+", label: "Projects Completed" },
-            { number: "100%", label: "Client Satisfaction" },
-            { number: "3+", label: "Years Experience" },
-            { number: "24/7", label: "Support Available" }
-          ].map((stat, index) => (
-            <motion.div key={index} variants={itemVariants} className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-primary mb-2">{stat.number}</div>
-              <div className="text-sm text-muted-foreground">{stat.label}</div>
-            </motion.div>
-          ))}
-        </motion.div>
+          <p className="text-sm text-muted-foreground mt-2">
+            4.9/5 based on 2,500+ reviews
+          </p>
+        </div>
       </div>
     </section>
   );

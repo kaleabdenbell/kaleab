@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { ExternalLink, Github, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface Project {
   id: string;
@@ -104,7 +105,7 @@ export const Projects = () => {
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-            Featured <span className="bg-gradient-primary bg-clip-text text-transparent">Projects</span>
+            <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">Featured Projects</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
             A showcase of my recent work and creative solutions
@@ -132,6 +133,7 @@ export const Projects = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.map((project, index) => (
             <Card 
+              onMouseDown={() => (window.location.href = `/case-study/${project.caseStudySlug}`)}
               key={project.id}
               className="group overflow-hidden hover:shadow-elegant transition-all duration-300 hover:scale-105 animate-slide-up"
               style={{ animationDelay: `${index * 0.1}s` }}
@@ -195,10 +197,10 @@ export const Projects = () => {
                   className="w-full group/btn"
                   asChild
                 >
-                  <a href={`/case-study/${project.caseStudySlug}`}>
+                  <Link href={`/skill/${project.caseStudySlug}`}>
                     <span>View Case Study</span>
                     <ArrowRight className="h-4 w-4 ml-2 group-hover/btn:translate-x-1 transition-transform duration-300" />
-                  </a>
+                  </Link>
                 </Button>
               </div>
             </Card>

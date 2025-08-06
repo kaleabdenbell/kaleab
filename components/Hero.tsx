@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 export const Hero = () => {
   const [displayText, setDisplayText] = useState('');
@@ -58,8 +59,8 @@ export const Hero = () => {
         <div className="animate-fade-in">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
             <span className="text-foreground">Hi, I&apos;m </span>
-            <span className="bg-gradient-primary bg-clip-text text-transparent">
-              Alex Johnson
+            <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+              Kaleab Denbel
             </span>
           </h1>
           
@@ -79,12 +80,12 @@ export const Hero = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
             <Button 
               size="lg" 
-              className="bg-gradient-primary hover:shadow-glow transition-all duration-300 hover:scale-105"
+              className="bg-secondary hover:shadow-glow transition-all duration-300 hover:scale-105"
             >
-              <a href="#projects" className="flex items-center gap-2">
+              <Link href="#projects" className="flex items-center gap-2">
                 View My Work
                 <ArrowDown className="h-4 w-4" />
-              </a>
+              </Link>
             </Button>
             
             <Button 
@@ -92,37 +93,37 @@ export const Hero = () => {
               size="lg"
               className="border-primary/30 hover:border-primary hover:bg-primary/10 transition-all duration-300"
             >
-              <a href="#contact" className="flex items-center gap-2">
+              <Link href="#contact" className="flex items-center gap-2">
                 <Mail className="h-4 w-4" />
                 Get In Touch
-              </a>
+              </Link>
             </Button>
           </div>
           
           {/* Social Links */}
           <div className="flex justify-center space-x-6">
-            <a 
+            <Link 
               href="https://github.com" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-primary transition-colors duration-300 hover:scale-110 transform"
             >
               <Github className="h-6 w-6" />
-            </a>
-            <a 
+            </Link>
+            <Link
               href="https://linkedin.com" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-primary transition-colors duration-300 hover:scale-110 transform"
             >
               <Linkedin className="h-6 w-6" />
-            </a>
-            <a 
+            </Link>
+            <Link
               href="mailto:alex@example.com"
               className="text-muted-foreground hover:text-primary transition-colors duration-300 hover:scale-110 transform"
             >
               <Mail className="h-6 w-6" />
-            </a>
+            </Link>
           </div>
         </div>
       </div>
