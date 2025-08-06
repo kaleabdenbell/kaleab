@@ -16,6 +16,7 @@ import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface CaseStudyData {
   id: string;
@@ -214,7 +215,9 @@ export default async function caseStudySlug({ params }: { params: Promise<{ slug
             </div>
             
             <div className="animate-slide-up" style={{ animationDelay: '0.2s' }}>
-              <img 
+              <Image
+                height={400}
+                width={600}
                 src={caseStudy.heroImage} 
                 alt={caseStudy.title}
                 className="w-full rounded-2xl shadow-elegant"
@@ -394,7 +397,7 @@ export default async function caseStudySlug({ params }: { params: Promise<{ slug
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {caseStudy.results.feedback.map((feedback, index) => (
                 <Card key={index} className="p-6">
-                  <p className="text-muted-foreground italic">"{feedback}"</p>
+                  <p className="text-muted-foreground italic">&quot;{feedback}&quot;</p>
                 </Card>
               ))}
             </div>
@@ -409,7 +412,7 @@ export default async function caseStudySlug({ params }: { params: Promise<{ slug
             Ready to start your project?
           </h2>
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Let's discuss how we can bring your ideas to life with modern technology and thoughtful design.
+            Let&apos;s discuss how we can bring your ideas to life with modern technology and thoughtful design.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

@@ -68,7 +68,7 @@ export const Testimonials = () => {
             What Our Users Say
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Don't just take our word for it. Here's what real users have to say about their experience.
+            Don&apos;t just take our word for it. Here&apos;s what real users have to say about their experience.
           </p>
         </div>
 
@@ -90,7 +90,7 @@ export const Testimonials = () => {
                     <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z"/>
                   </svg>
                   <p className="text-foreground leading-relaxed">
-                    "{testimonial.content}"
+                    &quot;{testimonial.content}&quot;
                   </p>
                 </div>
 
